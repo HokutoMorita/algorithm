@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Any
+from typing import Any, Optional
 
 
 class Node(object):
@@ -89,7 +89,7 @@ class LinkedList(object):
         
         self.head = _reverse_recursive(self.head, None)
 
-    def reverse_even(self) -> None:
+    def reverse_even(self) -> Optional[Node]:
         """
         連続したノードが偶数の場合のみreverseする
         """
