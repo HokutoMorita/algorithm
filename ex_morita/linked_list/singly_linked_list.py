@@ -89,19 +89,51 @@ class LinkedList(object):
         
         self.head = _reverse_recursive(self.head, None)
 
+    def reverse_even(self) -> None:
+        """
+        連続したノードが偶数の場合のみreverseする
+        """
+        def _reverse_even(head: Node, previous_node: Node):
+            if head is None:
+                return None
+            current_node = head
+            while current_node and current_node.data % 2 == 0:
+                next_node = current_node.next
+                current_node.next = previous_node
+                previous_node = current_node
+                current_node = next_node
+
+            if current_node != head:
+                head.next = current_node
+                _reverse_even(current_node, None)
+                return previous_node
+            else:
+                head.next = _reverse_even(head.next, head)
+                return head
+        
+        self.head = _reverse_even(self.head, None)
+
 if __name__=='__main__':
     l = LinkedList()
-    l.append(1)
-    l.append(2)
-    l.append(3)
-    l.insert(0)
-    l.print()
-    print("#####")
-    l.remove(2)
-    l.print()
+    # l.append(1)
+    # l.append(2)
+    # l.append(3)
+    # l.insert(0)
+    # l.print()
+    # print("#####")
+    # l.remove(2)
+    # l.print()
     print("#####")
     # l.reverse_iterative()
-    l.reverse_recursive()
+    # l.reverse_recursive()
+    l.append(2)
+    l.append(4)
+    l.append(6)
+    l.append(1)
+    l.append(2)
+    l.append(4)
+    l.append(6)
+    l.reverse_even()
     l.print()
     # print(l.head.data)
     # print(l.head.next.data)
