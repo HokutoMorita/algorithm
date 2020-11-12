@@ -89,11 +89,11 @@ class LinkedList(object):
         
         self.head = _reverse_recursive(self.head, None)
 
-    def reverse_even(self) -> Optional[Node]:
+    def reverse_even(self) -> None:
         """
         連続したノードが偶数の場合のみreverseする
         """
-        def _reverse_even(head: Node, previous_node: Node):
+        def _reverse_even(head: Node, previous_node: Node) -> Optional[Node]:
             if head is None:
                 return None
             current_node = head
