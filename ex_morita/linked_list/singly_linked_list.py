@@ -61,6 +61,33 @@ class LinkedList(object):
         # 削除対象のデータがあるノード(current_node)を外して、LinkedListを繋ぎ直す処理
         previous_node.next = current_node.next
         current_node = None
+    
+    def reverse_iterative(self) -> None:
+        """
+        LinkedListの要素の順番を逆向きに並べ替える
+        """
+        previous_node = None
+        current_node = self.head
+        while current_node:
+            next_node = current_node.next
+            current_node.next = previous_node
+
+            previous_node = current_node
+            current_node = next_node
+        self.head = previous_node
+    
+    def reverse_recursive(self) -> None:
+        def _reverse_recursive(current_node: Node, previous_node: Node):
+            if not current_node: # current_nodeがNoneの場合
+                return previous_node
+            next_node = current_node.next
+            current_node.next = previous_node
+            previous_node = current_node
+            current_node = next_node
+
+            return _reverse_recursive(current_node, previous_node)
+        
+        self.head = _reverse_recursive(self.head, None)
 
 if __name__=='__main__':
     l = LinkedList()
@@ -71,6 +98,10 @@ if __name__=='__main__':
     l.print()
     print("#####")
     l.remove(2)
+    l.print()
+    print("#####")
+    # l.reverse_iterative()
+    l.reverse_recursive()
     l.print()
     # print(l.head.data)
     # print(l.head.next.data)
